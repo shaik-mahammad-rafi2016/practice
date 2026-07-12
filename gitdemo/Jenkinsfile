@@ -56,6 +56,13 @@ stage('Check Docker') {
         bat 'docker ps'
     }
 }
+stage('Build Docker Image') {
+    steps {
+        dir('gitdemo') {
+            bat 'docker build -t gitdemo .'
+        }
+    }
+}
 
         stage('Archive Artifact') {
             steps {
