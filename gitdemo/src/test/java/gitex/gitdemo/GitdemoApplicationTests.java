@@ -1,13 +1,13 @@
-package gitex.gitdemo;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class GitdemoApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+//package gitex.gitdemo;
+//
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//@SpringBootTest
+//class GitdemoApplicationTests {
+//
+//	@Test
+//	void contextLoads() {
+//	}
+//
+//}

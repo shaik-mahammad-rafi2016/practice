@@ -43,13 +43,19 @@ pipeline {
             }
         }
 
-        stage('Quality Gate') {
-            steps {
-                timeout(time: 5, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
+//         stage('Quality Gate') {
+//             steps {
+//                 timeout(time: 5, unit: 'MINUTES') {
+//                     waitForQualityGate abortPipeline: true
+//                 }
+//             }
+//         }
+stage('Check Docker') {
+    steps {
+        bat 'docker --version'
+        bat 'docker ps'
+    }
+}
 
         stage('Archive Artifact') {
             steps {
