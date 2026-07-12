@@ -8,11 +8,12 @@ pipeline {
     }
 
     stages {
-    stage('Clean Workspace') {
-        steps {
-            cleanWs()
+
+        stage('Clean Workspace') {
+            steps {
+                cleanWs()
+            }
         }
-    }
 
         stage('Checkout') {
             steps {
@@ -23,7 +24,29 @@ pipeline {
         stage('Build & Test') {
             steps {
                 dir('gitdemo') {
-                    bat 'mvn clean package'
+                    bat 'mvn clean verify'
+                }
+            }
+        }
+
+        stage('SonarQube Scan') {
+            steps {
+                dir('gitdemo') {
+                    withSonarQubeEnv('SonarQube') {
+                        bat '''
+                        mvn sonar:sonar ^
+                        -Dsonar.projectKey=gitdemo ^
+                        -Dsonar.host.url=http://localhost:9000
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }
